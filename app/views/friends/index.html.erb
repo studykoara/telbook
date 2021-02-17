@@ -1,0 +1,31 @@
+<% @page_title = "友達一覧" %>
+<h1><span style="color:red">T</span>elephone <span style="color:red">B</span>ook</h1>
+
+<div class="toolbar"><%= link_to "add", :new_friend %></div>
+
+<% if @friends.present? %>
+  <table class="list">
+    <thead>
+      <tr>
+        <th style="text-align: right">Name</th>
+        <th>Control</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @friends.each do |friend| %>
+        <tr>
+          <td style="text-align: right"><%= link_to friend.name, "friends/#{friend.id}/telephones" %></td>
+          <td>
+            <span style="color: red"><%= link_to "edit", [:edit, friend] %></span> |
+            <span style="color: red"><%= link_to "delete", friend, method: :delete,
+              data: { confirm: "本当に削除しますか?" } %></span>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @friends %>
+
+<% else %>
+  <p>友達が登録されていません。</p>
+<% end %>

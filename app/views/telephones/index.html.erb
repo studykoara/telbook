@@ -1,0 +1,43 @@
+<%= render "shared/errors", obj: @telephone %>
+<% @page_title = "友達の詳細" %>
+
+<h1><span style="color:red">T</span>elephone <span style="color:red">B</span>ook</h1>
+
+<table class="attr">
+  <tr>
+    <th>Name</th>
+    <td><%= @friend.name %></td>
+  </tr>
+  <tr>
+    <% if @telephones.present? %>
+      <% @telephones.each do |telephone| %>
+    <th>Tel</th>
+    <td><%= telephone.number %></td>
+    <td>
+      <% if telephone.cellphone %>
+        <span>📱</span>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to "delete", telephone, method: :delete,
+        data: { confirm: "本当に削除しますか?" } %>
+    </td>
+    <% end %>
+    <% else %>
+      <p>電話番号が登録されていません。</p>
+    <% end %>
+  </tr>
+  <%= form_for [@friend, @telephone] do |form| %>
+  <tr>
+    <td>
+      <%= form.text_field :number %>
+      <%= form.check_box :cellphone %>
+      <div>
+        <%= form.submit "add" %>
+      </div>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<br>
+<div><%= link_to "<<TOP", :friends %></div>

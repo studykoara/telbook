@@ -1,0 +1,35 @@
+<% @page_title = "友達の詳細" %>
+
+<h1><%= @page_title %></h1>
+
+<table class="attr">
+  <tr>
+    <th>氏名</th>
+    <td><%= @friend.name %></td>
+  </tr>
+  <tr>
+    <% if @telephones.present? %>
+      <% @telephones.each do |telephone| %>
+    <th>電話番号</th>
+    <td><%= telephone.number %></td>
+    <td><%= @telephone.cellphone? ? "○" : "ー" %></td>
+    <td>
+      <%= link_to "削除", telephone, method: :delete,
+        data: { confirm: "本当に削除しますか?" } %>
+    </td>
+    <% end %>
+    <% else %>
+      <p>電話番号が登録されていません。</p>
+    <% end %>
+  </tr>
+  <%= form_for [@friend, @telephone] do |form| %>
+  <tr>
+    <td>
+      <%= form.text_field :number %>
+      <div>
+        <%= form.submit "追加" %>
+      </div>
+    </td>
+  </tr>
+  <% end %>
+</table>

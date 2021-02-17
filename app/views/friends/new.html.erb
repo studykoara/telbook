@@ -1,0 +1,10 @@
+<% @page_title = "友達の新規登録" %>
+
+<h1><span style="color:red">T</span>elephone <span style="color:red">B</span>ook</h1>
+
+<%= form_for @friend do |form| %>
+  <%= render "form", form: form %>
+  <div><%= form.submit %></div>
+<% end %>
+<br>
+<div><%= link_to "<<TOP", :friends %></div>
